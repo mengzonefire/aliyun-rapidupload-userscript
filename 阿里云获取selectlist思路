@@ -1,0 +1,9 @@
+bundle.js内所有的对象都保存在window.webpackChunk_ali_aliyun_drive_web_name_对象内, 在里面找到对应的获取方法, 需要找的关键属性: listModel.selectedIds.file_id
+
+            n = (window.webpackChunk_ali_aliyun_drive_web_name_ =
+              window.webpackChunk_ali_aliyun_drive_web_name_ || []);
+
+bundle源码解析: 
+step1:
+line2->声明入口函数, function (e, t)
+line15->调用入口函数, 参数e为window对象, 参数t为function...
