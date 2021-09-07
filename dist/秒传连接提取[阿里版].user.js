@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 秒传连接提取[阿里版]
-// @version 1.0.2
+// @version 1.0.3
 // @author mengzonefire
 // @description 用于提取和生成阿里云盘秒传链接
 // @homepage https://greasyfork.org/zh-CN/scripts/424574
@@ -170,7 +170,7 @@
                     if (value === "set") {
                         return;
                     }
-                    if (!aliyunParser.parse(value).length) {
+                    if (!aliyunParser.parse(value)) {
                         return '<p>未识别到正确的链接 <a href="' + doc.linkTypeDoc + '" ' + linkStyle + ">查看支持格式</a></p>";
                     }
                 }

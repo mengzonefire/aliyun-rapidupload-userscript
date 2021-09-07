@@ -19,7 +19,7 @@ export const SwalConfig = {
       if (value === "set") {
         return;
       }
-      if (!DuParser.parse(value).length) {
+      if (!DuParser.parse(value)) {
         return `<p>未识别到正确的链接 <a href="${doc.linkTypeDoc}" ${linkStyle}>查看支持格式</a></p>`;
       }
     },
