@@ -1,7 +1,6 @@
-import checkBoxCss from "@/components/checkBox.css";
 import appCss from "@/app.css";
 import { showAlert } from "./utils";
-import { extCssUrl, appError, ajaxError, swalCssVer } from "./const";
+import { extCssUrl, appError, swalCssVer } from "./const";
 import ajax from "./ajax";
 
 /**
@@ -9,7 +8,6 @@ import ajax from "./ajax";
  */
 export function injectStyle(): void {
   GM_addStyle(appCss); // 注入自定义样式
-  GM_addStyle(checkBoxCss); // 注入checkBox选框样式
   let swalThemes: string = GM_getValue("swalThemes") || "Default"; // sweetAlert的主题(css), 默认为Default
   let defaultThemes: string = GM_getResourceText("swalCss");
   if (swalThemes === "Default") {
@@ -51,8 +49,7 @@ function getThemesCss(swalThemes: string): void {
     },
 
     (statusCode) => {
-      if (statusCode === ajaxError) showAlert(appError.SwalCssErrReq);
-      else showAlert(appError.SwalCssBadReq + `(http#${statusCode})`);
+      showAlert(appError.SwalCssErrReq + `(http#${statusCode})`);
     }
   );
 }

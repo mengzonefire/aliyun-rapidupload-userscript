@@ -1,9 +1,9 @@
 /*
  * @Author: mengzonefire
  * @Date: 2021-08-27 14:48:24
- * @LastEditTime: 2021-08-30 02:52:03
+ * @LastEditTime: 2021-09-07 23:50:56
  * @LastEditors: mengzonefire
- * @Description: 自封装JQ ajax方法
+ * @Description: 自封装ajax方法
  */
 
 import { ajaxError } from "./const";
@@ -16,8 +16,6 @@ export default function ajax(
   GM_xmlhttpRequest({
     ...config,
     onload: (r: any) => {
-      // debug
-      // console.log(r);
       if (Math.floor(r.status / 100) === 2) callback(r);
       else failback(r.status);
     },

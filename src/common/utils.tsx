@@ -1,4 +1,9 @@
-import { baiduErrno, bdstoken_url, setbdstoken } from "@/baidu/common/const";
+import {
+  tokenUrl,
+  setToken,
+  setDriverId,
+  aliyunErrno,
+} from "@/aliyun/common/const";
 import ajax from "./ajax";
 import { FileInfo, TAG } from "./const";
 
@@ -8,23 +13,6 @@ import { FileInfo, TAG } from "./const";
  */
 export function showAlert(text: string): void {
   alert(`${TAG}:\n${text}`);
-}
-
-/**
- * @description: md5随机大小写
- * @param {string} string
- * @return {string}
- */
-export function randomStringTransform(string: string): string {
-  const tempString = [];
-  for (let i of string) {
-    if (!Math.round(Math.random())) {
-      tempString.push(i.toLowerCase());
-    } else {
-      tempString.push(i.toUpperCase());
-    }
-  }
-  return tempString.join("");
 }
 
 /**
@@ -39,11 +27,11 @@ export function parsefileInfo(fileInfoList: Array<FileInfo>) {
   fileInfoList.forEach((item) => {
     if (item.errno) {
       failedCount++;
-      failedInfo += `<p>文件：${item.path}</p><p>失败原因：${baiduErrno(
+      failedInfo += `<p>文件：${item.path}</p><p>失败原因：${aliyunErrno(
         item.errno
       )}(#${item.errno})</p>`;
     } else {
-      bdcode += `${item.md5}#${item.md5s}#${item.size}#${item.path}\n`;
+      bdcode += `aliyunpan://${item.path}|${item.hash}|${item.size}\n`;
       successList.push(item);
     }
   });
@@ -58,51 +46,58 @@ export function parsefileInfo(fileInfoList: Array<FileInfo>) {
 }
 
 /**
- * @description: 获取bdstoken
+ * @description: 获取access_token 和 drive_id
  */
-export function getbdstoken() {
+export function getAccessToken(onFinish: () => void) {
   ajax(
     {
-      url: bdstoken_url,
+      url: tokenUrl,
       method: "POST",
       responseType: "json",
-      data: convertData({
-        fields: JSON.stringify(["bdstoken"]),
+      headers: {
+        "Content-type": "application/json;charset=utf-8",
+      },
+      data: JSON.stringify({
+        refresh_token: JSON.parse(localStorage.getItem("token")).refresh_token,
       }),
     },
     (data) => {
       data = data.response;
-      if (!data.errno && data.result.bdstoken)
-        setbdstoken(data.result.bdstoken);
-      else
-        showAlert(
-          `获取bdstoken失败(${data.errno}), 可能导致转存失败(#2), 请尝试刷新页面, 或重新登录`
-        );
+      if (data.access_token) setToken(data.access_token);
+      else {
+        showAlert(`获取token失败, 请尝试刷新页面, 或重新登录`);
+        return;
+      }
+      let drive_id = localStorage.getItem("token");
+      if (drive_id) setDriverId(JSON.parse(drive_id).default_drive_id);
+      else {
+        showAlert(`获取driveId失败, 请尝试刷新页面, 或重新登录`);
+        return;
+      }
+      onFinish();
     },
     (statusCode) => {
-      showAlert(
-        `获取bdstoken失败(${statusCode}), 可能导致转存失败(#2), 请尝试刷新页面, 或重新登录`
-      );
+      showAlert(`获取token失败(${statusCode}), 请尝试刷新页面, 或重新登录`);
     }
   );
 }
 
 /**
- * @description: 获取选择的文件列表(仅旧版界面可用)
+ * @description: 添加原生XHR回调
  */
-export function getSelectedFileList() {
-  return unsafeWindow
-    .require("system-core:context/context.js")
-    .instanceForSystem.list.getSelected();
-}
-
-/**
- * @description: 将data键值对转换为query字符串
- * @param {any} data
- * @return {string} query string
- */
-export function convertData(data: any): string {
-  let query = "";
-  for (let key in data) query += `&${key}=${encodeURIComponent(data[key])}`;
-  return query;
+export function addXMLRequestCallback(callback: any) {
+  (function (open) {
+    XMLHttpRequest.prototype.open = function () {
+      this.addEventListener(
+        "readystatechange",
+        function () {
+          if (this.readyState === 4) {
+            callback(this);
+          }
+        },
+        false
+      );
+      open.apply(this, arguments);
+    };
+  })(XMLHttpRequest.prototype.open);
 }
