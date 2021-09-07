@@ -1,7 +1,7 @@
 /*
  * @Author: mengzonefire
  * @Date: 2021-08-25 08:34:46
- * @LastEditTime: 2021-09-08 00:12:42
+ * @LastEditTime: 2021-09-08 01:03:46
  * @LastEditors: mengzonefire
  * @Description: 定义全套的前台弹窗逻辑, 在Swal的回调函数内调用***Task类内定义的任务代码
  */
@@ -74,9 +74,7 @@ export default class Swalbase {
       : this.rapiduploadTask.fileInfoList;
     let parseResult = parsefileInfo(fileInfoList);
     if (isGen) this.rapiduploadTask.fileInfoList = parseResult.successList;
-    let html =
-      (parseResult.htmlInfo && isGen ? "<p><br></p>" : "") +
-      parseResult.htmlInfo; // 添加失败列表, 生成模式下添加顶部空行分隔
+    let html = parseResult.htmlInfo; // 添加失败列表
     let htmlFooter = "";
     if (!GM_getValue(`${donateVer}_kill_donate`)) htmlFooter += htmlDonate; // 添加赞助入口提示
     if (!GM_getValue(`${feedbackVer}_kill_donate`)) htmlFooter += htmlFeedback; // 添加反馈入口提示
@@ -97,8 +95,8 @@ export default class Swalbase {
             GM_setClipboard(parseResult.bdcode);
           } else {
             // 转存模式, "确定" 按钮
-            let alink = location.href.match(bdlinkPattern)
-            if (alink) location.href = location.href.replace(alink[0], "")
+            let alink = location.href.match(bdlinkPattern);
+            if (alink) location.href = location.href.replace(alink[0], "");
             else location.reload();
           }
         }

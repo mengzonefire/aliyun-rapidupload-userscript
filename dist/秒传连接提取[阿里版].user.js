@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 秒传连接提取[阿里版]
-// @version 1.0.1
+// @version 1.0.2
 // @author mengzonefire
 // @description 用于提取和生成阿里云盘秒传链接
 // @homepage https://greasyfork.org/zh-CN/scripts/424574
@@ -383,7 +383,7 @@
                 var fileInfoList = isGen ? this.generatebdlinkTask.fileInfoList : this.rapiduploadTask.fileInfoList;
                 var parseResult = parsefileInfo(fileInfoList);
                 if (isGen) this.rapiduploadTask.fileInfoList = parseResult.successList;
-                var html = (parseResult.htmlInfo && isGen ? "<p><br></p>" : "") + parseResult.htmlInfo;
+                var html = parseResult.htmlInfo;
                 var htmlFooter = "";
                 if (!GM_getValue(donateVer + "_kill_donate")) htmlFooter += htmlDonate;
                 if (!GM_getValue(feedbackVer + "_kill_donate")) htmlFooter += htmlFeedback;

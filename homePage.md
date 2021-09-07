@@ -1,7 +1,5 @@
 若喜欢该脚本可前往 <img src="https://static.afdiancdn.com/favicon.ico" width='16'>[爱发电](https://afdian.net/@mengzonefire) 支持作者
 
-## 近期通知
-
 ## 相关教程
 
 * [安装教程](https://shimo.im/docs/Jqf8y260KuofSb4K/): 适用于<span style="color: red;"> 不能正常使用 </span>或<span style="color: red;"> 不会安装 </span>此脚本的用户 [Win/安卓/IOS]

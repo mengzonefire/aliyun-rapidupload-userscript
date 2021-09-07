@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 秒传连接提取[阿里版]
-// @version 1.0.1
+// @version 1.0.2
 // @author mengzonefire
 // @description 用于提取和生成阿里云盘秒传链接
 // @homepage https://greasyfork.org/zh-CN/scripts/424574
