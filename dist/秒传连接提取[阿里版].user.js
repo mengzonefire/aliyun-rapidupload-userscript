@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 秒传连接提取[阿里版]
-// @version 1.0.3
+// @version 1.0.4
 // @author mengzonefire
 // @description 用于提取和生成阿里云盘秒传链接
 // @homepage https://greasyfork.org/zh-CN/scripts/424574
@@ -312,13 +312,7 @@
         var searchInfoList = {};
         function XHRcallback(xhr) {
             var action = "";
-            if (xhr.responseURL == "https://api.aliyundrive.com/adrive/v3/file/list") {
-                action = "list";
-                pathInfoList = {};
-            } else if (xhr.responseURL == "https://api.aliyundrive.com/adrive/v3/file/search") {
-                action = "search";
-                searchInfoList = {};
-            } else {
+            if (xhr.responseURL == "https://api.aliyundrive.com/adrive/v3/file/list") action = "list"; else if (xhr.responseURL == "https://api.aliyundrive.com/adrive/v3/file/search") action = "search"; else {
                 return;
             }
             JSON.parse(xhr.response).items.forEach((function(item) {
@@ -560,6 +554,7 @@
         var renameUrl = "https://api.aliyundrive.com/v3/file/update";
         var creatUrl = "https://api.aliyundrive.com/v2/file/create";
         var htmlTag = "div.breadcrumb-wrap--2iqqe";
+        var htmlTag2 = "div.content--1zqgM";
         var const_btnStyle = 'class="button-wrapper--1UkG6" data-type="primary" style="margin-left: 20px;"';
         var renameBtn = '<div id="mzf_rename" ' + const_btnStyle + ">重命名</div>";
         var bdlinkBtn = '<div id="mzf_bdlink" ' + const_btnStyle + ">秒传链接</div>";
@@ -619,7 +614,20 @@
         }
         function addBtn() {
             var targetTag = $(htmlTag);
-            if (targetTag.length && targetTag.children.length === 2) targetTag.append(renameBtn).append(bdlinkBtn).append(genBtn); else setTimeout(addBtn, 100);
+            if (targetTag.length && targetTag.children.length === 2) {
+                targetTag.append(renameBtn).append(bdlinkBtn).append(genBtn);
+                addObserver();
+            } else setTimeout(addBtn, 100);
+        }
+        function addObserver() {
+            var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+            var observer = new MutationObserver((function() {
+                var targetTag = $(htmlTag);
+                if (targetTag.length && targetTag.children.length === 2) targetTag.append(renameBtn).append(bdlinkBtn).append(genBtn);
+            }));
+            observer.observe($(htmlTag2)[0], {
+                childList: true
+            });
         }
         var app = __webpack_require__(555);
         var app_default = __webpack_require__.n(app);

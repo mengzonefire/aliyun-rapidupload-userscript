@@ -4,15 +4,13 @@ export var pathInfoList = {};
 export var searchInfoList = {};
 export function XHRcallback(xhr: XMLHttpRequest) {
   let action = "";
-  if (xhr.responseURL == "https://api.aliyundrive.com/adrive/v3/file/list") {
+  if (xhr.responseURL == "https://api.aliyundrive.com/adrive/v3/file/list")
     action = "list";
-    pathInfoList = {};
-  } else if (
+  else if (
     xhr.responseURL == "https://api.aliyundrive.com/adrive/v3/file/search"
-  ) {
+  )
     action = "search";
-    searchInfoList = {};
-  } else {
+  else {
     return;
   }
   JSON.parse(xhr.response).items.forEach(function (item: any) {

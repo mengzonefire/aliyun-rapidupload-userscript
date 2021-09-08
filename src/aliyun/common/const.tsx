@@ -4,7 +4,8 @@ import RapiduploadTask from "./RapiduploadTask";
 export const tokenUrl = "https://websv.aliyundrive.com/token/refresh";
 export const renameUrl = "https://api.aliyundrive.com/v3/file/update";
 export const creatUrl = "https://api.aliyundrive.com/v2/file/create";
-export const htmlTag = "div.breadcrumb-wrap--2iqqe";
+export const htmlTag = "div.breadcrumb-wrap--2iqqe"; // 添加按钮的目标节点
+export const htmlTag2 = "div.content--1zqgM"; // 用于监听页面变化的父节点
 export const btnStyle =
   'class="button-wrapper--1UkG6" data-type="primary" style="margin-left: 20px;"';
 export const renameBtn = `<div id="mzf_rename" ${btnStyle}>重命名</div>`;

@@ -4,6 +4,7 @@ import {
   bdlinkBtn,
   genBtn,
   htmlTag,
+  htmlTag2,
   renameBtn,
   swalInstance,
 } from "./common/const";
@@ -45,7 +46,21 @@ export function loaderAliyun(): void {
 
 function addBtn() {
   let targetTag = $(htmlTag);
-  if (targetTag.length && targetTag.children.length === 2)
+  if (targetTag.length && targetTag.children.length === 2) {
     targetTag.append(renameBtn).append(bdlinkBtn).append(genBtn);
-  else setTimeout(addBtn, 100);
+    addObserver();
+  } else setTimeout(addBtn, 100);
+}
+
+function addObserver() {
+  let MutationObserver =
+    window.MutationObserver ||
+    window.WebKitMutationObserver ||
+    window.MozMutationObserver;
+  let observer = new MutationObserver(function () {
+    let targetTag = $(htmlTag);
+    if (targetTag.length && targetTag.children.length === 2)
+      targetTag.append(renameBtn).append(bdlinkBtn).append(genBtn);
+  });
+  observer.observe($(htmlTag2)[0], { childList: true });
 }
