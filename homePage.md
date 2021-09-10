@@ -1,5 +1,9 @@
 若喜欢该脚本可前往 <img src="https://static.afdiancdn.com/favicon.ico" width='16'>[爱发电](https://afdian.net/@mengzonefire) 支持作者
 
+## 近期通知
+
+* 21.9.9: 由于官方限制了秒传接口(添加了验证), 秒传功能现已无法使用, 由于技术上基本无法破解该验证, 个人已停止维护该项目, 在此预祝阿里云盘生意兴隆.
+
 ## 相关教程
 
 * [安装教程](https://shimo.im/docs/Jqf8y260KuofSb4K/): 适用于<span style="color: red;"> 不能正常使用 </span>或<span style="color: red;"> 不会安装 </span>此脚本的用户 [Win/安卓/IOS]
