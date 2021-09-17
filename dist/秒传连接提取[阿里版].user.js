@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name 秒传连接提取[阿里版]
-// @version 1.0.4
+// @version 1.0.5
 // @author mengzonefire
 // @description 用于提取和生成阿里云盘秒传链接
 // @homepage https://greasyfork.org/zh-CN/scripts/424574
 // @supportURL https://github.com/mengzonefire/aliyun-rapidupload-userscript/issues
 // @match *://www.aliyundrive.com/drive*
 // @name:en aliyun-rapidupload-userscript
-// @license MIT
+// @license GPLv3
 // @icon data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABBUlEQVR4AZTTJRBUURTH4TtDwXuPdPrgbhHXiksf3CPucRNScHd3d3d3uO9bKeu7b79+fun8Q17CNHyMMUqaiPE4fEyYVjjGNKnNwQ4lpgV8lManEfwfosLHEGPU1N3ZnAv4qlT+NiQ56uPWSjKBrztUSnIaB66sY1vgxgxoMXB5NbsCB9rxcB5fN2M5/16nCFxeS6YTezpzsB1Pu/C2O7/78/99eYBYHXh+gqdHObGIK4GHgevjVIt1AgAnhvE4cGe8euoHbizgYuD2RGgx8O0RpwIPRmsmJDGqcrANd3pLo/qVr03hUlcpfSwf0/vD3JwkPdPK5/zhkOz+/f1FIDv/RcnOAEjywH/DhgADAAAAAElFTkSuQmCC
 // @namespace moe.cangku.mengzonefire
 // @homepageURL https://greasyfork.org/zh-CN/scripts/424574
